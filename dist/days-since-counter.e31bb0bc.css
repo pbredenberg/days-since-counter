@@ -1,0 +1,33 @@
+.container[data-v-f1616a] {
+  background: black;
+  color: white;
+  font-family: "VT323", sans-serif;
+  text-align: center;
+  padding: 2% 5%;
+}
+.headline[data-v-f1616a] {
+  font-size: 60px;
+}
+.button[data-v-f1616a] {
+  font-family: "VT323", sans-serif;
+  font-size: 2rem;
+  border: 0;
+  cursor: pointer;
+}
+.button.reset[data-v-f1616a] {
+  background-color: red;
+  color: white;
+  border-radius: 100%;
+  padding: 80px 70px;
+}
+.button.reset[data-v-f1616a]:active {
+  opacity: 0.8;
+}
+.button[data-v-f1616a]:focus {
+  outline: none;
+}
+.message-input[data-v-f1616a] {
+  padding: 12px;
+  font-family: "VT323", sans-serif;
+  font-size: 2rem;
+}
