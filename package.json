@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/parcel build index.html --public-url 'https://pbredenberg.github.io/days-since-counter/dist/'",
+    "dev": "./node_modules/.bin/parcel index.html"
   },
   "author": "",
   "license": "ISC",

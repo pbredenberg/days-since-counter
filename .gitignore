@@ -44,5 +44,7 @@ node_modules
 # grunt-ts
 .tscache
 
+.cache
+
 # NYC
 .nyc_output

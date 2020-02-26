@@ -7,4 +7,4 @@ var t=arguments[3];Object.defineProperty(exports,"__esModule",{value:!0}),export
 },{"vue":"NtAQ"}],"Focm":[function(require,module,exports) {
 "use strict";var e=r(require("vue")),u=r(require("./App.vue"));function r(e){return e&&e.__esModule?e:{default:e}}new e.default({render:function(e){return e(u.default)}}).$mount("#app");
 },{"vue":"NtAQ","./App.vue":"Js2s"}]},{},["Focm"], null)
-//# sourceMappingURL=days-since-counter.4a8eb11d.js.map
+//# sourceMappingURL=https://pbredenberg.github.io/days-since-counter/dist/days-since-counter.4a8eb11d.js.map
