@@ -53,15 +53,39 @@ export default Vue.extend({
   color: white;
   font-family: 'VT323', sans-serif;
   text-align: center;
-  padding: 2% 5%;
+  padding: 5%;
+  box-sizing: border-box;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  justify-content: center;
 }
 .headline {
-    font-size: 60px;
+    font-size: 52px;
+    @media (min-width: 645px) {
+        font-size: 9.5vw;
+    }
+}
+.editor {
+    padding-top: 20px;
+    opacity: .5;
+    &:hover {
+        opacity: 1;
+    }
+}
+.edit {
+    cursor: pointer;
+    display: inline-block;
+    padding: 6px;
 }
 .button {
     @include font();
     border: 0;
     cursor: pointer;
+    transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
     &.reset {
         background-color: red;
         color: white;
@@ -69,14 +93,23 @@ export default Vue.extend({
         padding: 80px 70px;
         &:active {
             opacity: .8;
+            background-color: darken(red, 25%);
         }
     }
     &:focus {
         outline: none;
     }
+    &:hover {
+        background-color: darken(red, 25%);
+        color: white;
+    }
 }
-.message-input {
+.message-input,
+.save {
     padding: 12px;
     @include font();
+}
+.message-input {
+    border: 0;
 }
 </style>

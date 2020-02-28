@@ -3,16 +3,42 @@
   color: white;
   font-family: "VT323", sans-serif;
   text-align: center;
-  padding: 2% 5%;
+  padding: 5%;
+  box-sizing: border-box;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  justify-content: center;
 }
 .headline[data-v-f1616a] {
-  font-size: 60px;
+  font-size: 52px;
+}
+@media (min-width: 645px) {
+.headline[data-v-f1616a] {
+    font-size: 9.5vw;
+}
+}
+.editor[data-v-f1616a] {
+  padding-top: 20px;
+  opacity: 0.5;
+}
+.editor[data-v-f1616a]:hover {
+  opacity: 1;
+}
+.edit[data-v-f1616a] {
+  cursor: pointer;
+  display: inline-block;
+  padding: 6px;
 }
 .button[data-v-f1616a] {
   font-family: "VT323", sans-serif;
   font-size: 2rem;
   border: 0;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .button.reset[data-v-f1616a] {
   background-color: red;
@@ -22,12 +48,21 @@
 }
 .button.reset[data-v-f1616a]:active {
   opacity: 0.8;
+  background-color: maroon;
 }
 .button[data-v-f1616a]:focus {
   outline: none;
 }
-.message-input[data-v-f1616a] {
+.button[data-v-f1616a]:hover {
+  background-color: maroon;
+  color: white;
+}
+.message-input[data-v-f1616a],
+.save[data-v-f1616a] {
   padding: 12px;
   font-family: "VT323", sans-serif;
   font-size: 2rem;
+}
+.message-input[data-v-f1616a] {
+  border: 0;
 }
