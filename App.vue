@@ -20,7 +20,9 @@
 <script lang="ts">
 import Vue from 'vue';
 
-const LOCAL_STORAGE_KEY = 'daysSinceMessage';
+const LOCAL_STORAGE_MESSAGE_KEY = 'daysSinceMessage';
+
+const LOCAL_STORAGE_TIMESTAMP_KEY = 'daysSinceTimestamp';
 
 export default Vue.extend({
   data() {
@@ -34,14 +36,14 @@ export default Vue.extend({
   methods: {
       toggleEditor() {
           this.isEditorShown = !this.isEditorShown;
-          this.persistData();
+          this.persistData(LOCAL_STORAGE_MESSAGE_KEY, this.message);
       },
-      persistData() {
-          localStorage.setItem(LOCAL_STORAGE_KEY, this.message);
+      persistData(key: string, value: string) {
+          localStorage.setItem(key, value);
       },
       retrievePersistedData() {
-          if (this.persistedItem) {
-              this.message = this.persistedItem;
+          if (this.persistedMessageItem) {
+              this.message = this.persistedMessageItem;
           } else {
               this.message = 'Since last incident.';
           }
@@ -49,14 +51,15 @@ export default Vue.extend({
   },
 
   computed: {
-      persistedItem() {
-          return localStorage.getItem(LOCAL_STORAGE_KEY);
+      persistedMessageItem() {
+          return localStorage.getItem(LOCAL_STORAGE_MESSAGE_KEY);
       }
   },
 
   mounted() {
       setInterval(() => {
           this.timer = this.timer + 1;
+          console.log(new Date().getTime());
       }, 1000);
       this.retrievePersistedData();
   }
