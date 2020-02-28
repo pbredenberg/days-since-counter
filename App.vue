@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="headline">
+        <h1 v-if="message" class="headline">
             <span class="counter">{{ timer }} Seconds </span>
             <span class="message">{{ message }}</span>
         </h1>
@@ -20,11 +20,13 @@
 <script lang="ts">
 import Vue from 'vue';
 
+const LOCAL_STORAGE_KEY = 'daysSinceMessage';
+
 export default Vue.extend({
   data() {
     return {
       timer: 0,
-      message: 'Since last incident.',
+      message: null,
       isEditorShown: false
     };
   },
@@ -32,13 +34,31 @@ export default Vue.extend({
   methods: {
       toggleEditor() {
           this.isEditorShown = !this.isEditorShown;
+          this.persistData();
+      },
+      persistData() {
+          localStorage.setItem(LOCAL_STORAGE_KEY, this.message);
+      },
+      retrievePersistedData() {
+          if (this.persistedItem) {
+              this.message = this.persistedItem;
+          } else {
+              this.message = 'Since last incident.';
+          }
+      }
+  },
+
+  computed: {
+      persistedItem() {
+          return localStorage.getItem(LOCAL_STORAGE_KEY);
       }
   },
 
   mounted() {
       setInterval(() => {
           this.timer = this.timer + 1;
-      }, 1000)
+      }, 1000);
+      this.retrievePersistedData();
   }
 });
 </script>
@@ -63,8 +83,19 @@ export default Vue.extend({
   align-content: center;
   justify-content: center;
 }
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 .headline {
     font-size: 52px;
+    opacity: 0;
+    transition: all .4s linear;
+    animation: fadeIn 0.5s .3s forwards;
     @media (min-width: 645px) {
         font-size: 9.5vw;
     }
@@ -76,21 +107,18 @@ export default Vue.extend({
         opacity: 1;
     }
 }
-.edit {
-    cursor: pointer;
-    display: inline-block;
-    padding: 6px;
-}
 .button {
     @include font();
     border: 0;
     cursor: pointer;
-    transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
     &.reset {
         background-color: red;
         color: white;
         border-radius: 100%;
+        opacity: 0;
         padding: 80px 70px;
+        transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        animation: fadeIn 0.5s .6s forwards;
         &:active {
             opacity: .8;
             background-color: darken(red, 25%);
@@ -104,6 +132,13 @@ export default Vue.extend({
         color: white;
     }
 }
+.edit {
+    cursor: pointer;
+    display: inline-block;
+    padding: 6px;
+    opacity: 0;
+    animation: fadeIn 0.5s .9s forwards;
+}
 .message-input,
 .save {
     padding: 12px;
@@ -111,5 +146,8 @@ export default Vue.extend({
 }
 .message-input {
     border: 0;
+    width: 400px;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 </style>

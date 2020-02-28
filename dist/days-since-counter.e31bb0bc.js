@@ -8903,17 +8903,34 @@ Object.defineProperty(exports, "__esModule", {
 
 var vue_1 = __importDefault(require("vue"));
 
+var LOCAL_STORAGE_KEY = 'daysSinceMessage';
 exports.default = vue_1.default.extend({
   data: function data() {
     return {
       timer: 0,
-      message: 'Since last incident.',
+      message: null,
       isEditorShown: false
     };
   },
   methods: {
     toggleEditor: function toggleEditor() {
       this.isEditorShown = !this.isEditorShown;
+      this.persistData();
+    },
+    persistData: function persistData() {
+      localStorage.setItem(LOCAL_STORAGE_KEY, this.message);
+    },
+    retrievePersistedData: function retrievePersistedData() {
+      if (this.persistedItem) {
+        this.message = this.persistedItem;
+      } else {
+        this.message = 'Since last incident.';
+      }
+    }
+  },
+  computed: {
+    persistedItem: function persistedItem() {
+      return localStorage.getItem(LOCAL_STORAGE_KEY);
     }
   },
   mounted: function mounted() {
@@ -8922,6 +8939,7 @@ exports.default = vue_1.default.extend({
     setInterval(function () {
       _this.timer = _this.timer + 1;
     }, 1000);
+    this.retrievePersistedData();
   }
 });
         var $f1616a = exports.default || module.exports;
@@ -8937,13 +8955,15 @@ exports.default = vue_1.default.extend({
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("h1", { staticClass: "headline" }, [
-      _c("span", { staticClass: "counter" }, [
-        _vm._v(_vm._s(_vm.timer) + " Seconds ")
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "message" }, [_vm._v(_vm._s(_vm.message))])
-    ]),
+    _vm.message
+      ? _c("h1", { staticClass: "headline" }, [
+          _c("span", { staticClass: "counter" }, [
+            _vm._v(_vm._s(_vm.timer) + " Seconds ")
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "message" }, [_vm._v(_vm._s(_vm.message))])
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "controls" }, [
       _c(
